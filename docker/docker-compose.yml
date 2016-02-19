@@ -1,0 +1,8 @@
+mongo:
+  image: mongo
+
+cassandra:
+  image: cassandra
+
+neo4j:
+  image: neo4j
