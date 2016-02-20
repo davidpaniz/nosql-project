@@ -1,0 +1,12 @@
+GEM
+  specs:
+    minitest (5.8.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.8, >= 5.8.3)
+
+BUNDLED WITH
+   1.11.2

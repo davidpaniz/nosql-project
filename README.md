@@ -1,6 +1,6 @@
 ## Nosql
 
-### Prerequisitos
+### Pré-requisitos
 
   * Docker e Docker compose -> https://docs.docker.com/compose/install/
 
