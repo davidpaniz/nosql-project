@@ -1,5 +1,8 @@
 ## Nosql
 
+#### Build
+[![Build Status](https://travis-ci.org/davidpaniz/nosql-project.svg?branch=master)](https://travis-ci.org/davidpaniz/nosql-project)
+
 ### Pré-requisitos
 
   * Docker e Docker compose -> https://docs.docker.com/compose/install/
