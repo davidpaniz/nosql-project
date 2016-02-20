@@ -1,12 +1,14 @@
 GEM
+  remote: https://rubygems.org/
   specs:
+    bson (4.0.2)
     minitest (5.8.3)
+    mongo (2.2.3)
+      bson (~> 4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   minitest (~> 5.8, >= 5.8.3)
-
-BUNDLED WITH
-   1.11.2
+  mongo (~> 2.2.3)

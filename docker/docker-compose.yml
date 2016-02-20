@@ -1,5 +1,8 @@
 mongo:
   image: mongo
+  ports:
+    - "27017:27017"
+
 
 cassandra:
   image: cassandra
