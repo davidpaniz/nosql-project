@@ -1,10 +1,21 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    beefcake (1.1.0)
     bson (4.0.2)
+    cert_validator (0.0.1)
+    i18n (0.7.0)
+    innertube (1.0.2)
     minitest (5.8.3)
     mongo (2.2.3)
       bson (~> 4.0)
+    multi_json (1.12.1)
+    riak-client (2.0.0)
+      beefcake (~> 1.0)
+      cert_validator (~> 0.0.1)
+      i18n (>= 0.4.0)
+      innertube (~> 1.0.2)
+      multi_json (~> 1.0)
 
 PLATFORMS
   ruby
@@ -12,3 +23,4 @@ PLATFORMS
 DEPENDENCIES
   minitest (~> 5.8, >= 5.8.3)
   mongo (~> 2.2.3)
+  riak-client (~> 2.0.0)
