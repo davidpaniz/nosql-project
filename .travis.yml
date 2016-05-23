@@ -2,8 +2,8 @@
 language: ruby
 
 services:
-  # - docker
   - mongodb
+  - riak
 
 rvm:
   - 2.3.0
