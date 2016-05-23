@@ -78,5 +78,26 @@ class TestMongo < Minitest::Test
 
     assert_equal 3, total
     assert_equal nome_albuns, ["Master of Puppets", "Peace Sells... but Who's Buying?", "Reign in Blood"]
+
+    # remove
+    query = @albuns.find("nome" => "...And Justice for All")
+    assert_equal 1, query.count
+    query.delete_one #equivalente a albuns.remove({"nome": "...And Justice for All"}, {justOne: true})
+    assert_equal 0, query.count
+
+
+    #udpate
+    album_antes = @albuns.find("nome" => "Among the Living").first
+    @albuns.update_one({"nome" => "Among the Living"}, {"duracao" => 3013})
+    album_depois = @albuns.find("_id" => album_antes['_id']).first
+    # O update sobrescreve o documento inteiro, apagando as chaves
+    refute_equal album_antes['nome'], album_depois['nome']
+    #update usando $set
+    @albuns.update_one({"_id" => album_antes['_id']}, {"$set" => {"nome" => "Among the Living",
+                                                                  "produtor" => "Eddie Kramer"}})
+
+    album_final = @albuns.find("nome" => "Among the Living").first
+    assert_equal "Among the Living", album_final['nome']
+    assert_equal 3013, album_final['duracao']
   end
 end
