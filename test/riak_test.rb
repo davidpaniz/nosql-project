@@ -13,6 +13,6 @@ class TestRiak < Minitest::Test
     voto.raw_data = "Fulano"
     voto.store
 
-    assert_equal "Fulano", @votacao.get("davidpaniz").raw_data
+    assert_equal "Fulano", @votacao.get("davidpaniz").data
   end
 end
