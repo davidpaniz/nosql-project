@@ -61,6 +61,22 @@ class TestMongo < Minitest::Test
     assert_equal 1, total
     assert_equal album['nome'], "Reign in Blood"
 
+    # find usando $and
+    query = @albuns.find("$and" => [{"dataLancamento" => {"$gte" => Date.new(1986, 1, 1)}},
+                                    {"dataLancamento" => {"$lt" =>  Date.new(1987, 1, 1)}}])
+    total = query.count
+    nome_albuns = query.map {|album| album['nome']}
 
+    assert_equal 3, total
+    assert_equal nome_albuns, ["Master of Puppets", "Peace Sells... but Who's Buying?", "Reign in Blood"]
+
+    # find com 2 critérios no mesmo campo
+    query = @albuns.find("dataLancamento" => {"$gte" => Date.new(1986, 1, 1),
+                                              "$lt" =>  Date.new(1987, 1, 1)})
+    total = query.count
+    nome_albuns = query.map {|album| album['nome']}
+
+    assert_equal 3, total
+    assert_equal nome_albuns, ["Master of Puppets", "Peace Sells... but Who's Buying?", "Reign in Blood"]
   end
 end
