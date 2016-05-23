@@ -31,6 +31,12 @@ class TestRiak < Minitest::Test
 
     assert_includes @riak.list_keys(@votacao), "adriano", "davidpaniz"
 
+    #update
+    voto = @votacao.get("davidpaniz")
+    voto.raw_data = "Ciclano"
+    voto.store
+    assert_equal "Ciclano", @votacao.get("davidpaniz").data
+
     #removendo primeiro voto
     @votacao.delete("davidpaniz")
     refute @votacao.exists?("davidpaniz")
