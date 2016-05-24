@@ -1,4 +1,5 @@
-require './test/test_helper'
+require 'minitest/autorun'
+require 'mongo'
 
 class TestMongo < Minitest::Test
   def setup

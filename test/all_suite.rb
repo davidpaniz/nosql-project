@@ -1,3 +1,3 @@
-require_relative './mongo_test'
-require_relative './riak_test'
-require_relative './cassandra_test'
+require './test/mongo_test'
+require './test/riak_test'
+require './test/cassandra_test'

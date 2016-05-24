@@ -28,3 +28,6 @@ DEPENDENCIES
   minitest
   mongo
   riak-client
+
+BUNDLED WITH
+   1.12.4

@@ -1,4 +1,5 @@
-require './test/test_helper'
+require 'minitest/autorun'
+require 'riak'
 
 class TestRiak < Minitest::Test
   def setup

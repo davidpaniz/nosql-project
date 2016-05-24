@@ -1,6 +1,7 @@
-require './test/test_helper'
+require 'minitest/autorun'
+require 'cassandra'
 
-class TestRiak < Minitest::Test
+class TestCassandra < Minitest::Test
   def setup
     @cassandra = Cassandra.cluster
 
