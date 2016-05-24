@@ -1,15 +1,14 @@
 require './test/test_helper'
-require 'mongo'
 
 class TestMongo < Minitest::Test
   def setup
-    @mongo  = Mongo::Client.new([@@host], :database => "ligato")
+    @mongo  = Mongo::Client.new(['localhost'], :database => "ligato")
     @albuns = @mongo[:albuns]
 
     @albuns.delete_many({})
   end
 
-  def test_all
+  def test_mongo_all
     assert_equal 0, @albuns.count
     @albuns.insert_one({})
     assert_equal 1, @albuns.count

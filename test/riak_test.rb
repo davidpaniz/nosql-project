@@ -1,9 +1,8 @@
 require './test/test_helper'
-require 'riak'
 
 class TestRiak < Minitest::Test
   def setup
-    @riak                = Riak::Client.new()
+    @riak                = Riak::Client.new
     @votacao             = @riak.bucket "votacao#{rand(999999)}"
     @contador            = @riak.bucket "contador#{rand(999999)}"
     @contador.props      = { "datatype" => "counter" }
@@ -17,7 +16,7 @@ class TestRiak < Minitest::Test
     voto
   end
 
-  def test_all
+  def test_riak_all
     assert_equal [], @riak.list_keys(@votacao)
 
     # adiciona primeiro voto

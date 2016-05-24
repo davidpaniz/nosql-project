@@ -1,15 +1,32 @@
 require './test/test_helper'
-require 'cassandra'
 
 class TestRiak < Minitest::Test
   def setup
     @cassandra = Cassandra.cluster
-    session = @cassandra.connect
+
+    cria_keyspace(@cassandra)
+
+    @ligado = @cassandra.connect 'ligado'
+    cria_tabela_musica(@ligado, @cassandra)
+  end
+
+  def test_cassandra_all
+    @ligado.execute "SELECT * FROM musicas"
+    assert_equal 1, 1
+  end
+
+
+  def cria_keyspace(client)
     keyspace_definition = <<-KEYSPACE_CQL
         CREATE KEYSPACE ligado
         WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '3'}
     KEYSPACE_CQL
 
+    client.connect.execute(keyspace_definition) unless client.has_keyspace?('ligado')
+  end
+
+
+  def cria_tabela_musica(session, client)
     table_definition = <<-TABLE_CQL
       CREATE TABLE musicas (
         id uuid PRIMARY KEY,
@@ -19,15 +36,8 @@ class TestRiak < Minitest::Test
       );
     TABLE_CQL
 
-    session.execute(keyspace_definition) unless @cassandra.has_keyspace?('ligado')
-
-    keyspace = @cassandra.keyspace('ligado')
-    @ligado = @cassandra.connect 'ligado'
-    @ligado.execute('DROP TABLE musicas') if keyspace.has_table?('musicas')
-    @ligado.execute(table_definition)
-  end
-
-  def test_all
-    @ligado.execute "SELECT * FROM musicas"
+    keyspace = client.keyspace('ligado')
+    session.execute('DROP TABLE musicas') if keyspace.has_table?('musicas')
+    session.execute(table_definition)
   end
 end
