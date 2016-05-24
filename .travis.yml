@@ -5,6 +5,7 @@ services:
   - mongodb
   - riak
   - cassandra
+  - neo4j
 
 rvm:
   - 2.3.0
