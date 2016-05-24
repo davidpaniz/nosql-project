@@ -3,11 +3,12 @@ require 'cassandra'
 
 class TestCassandra < Minitest::Test
   def setup
+    @keyspace = 'ligado'
     @cassandra = Cassandra.cluster
 
     cria_keyspace(@cassandra)
 
-    @ligado = @cassandra.connect 'ligado'
+    @ligado = @cassandra.connect @keyspace
     cria_tabela_musica(@ligado, @cassandra)
   end
 
@@ -19,11 +20,13 @@ class TestCassandra < Minitest::Test
 
   def cria_keyspace(client)
     keyspace_definition = <<-KEYSPACE_CQL
-        CREATE KEYSPACE ligado
+        CREATE KEYSPACE #{@keyspace}
         WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '3'}
     KEYSPACE_CQL
 
-    client.connect.execute(keyspace_definition) unless client.has_keyspace?('ligado')
+    client.connect.execute(keyspace_definition) unless client.has_keyspace?(@keyspace)
+    sleep 3 #FIXME remove sleep!!!
+    assert client.has_keyspace?(@keyspace)
   end
 
 
@@ -37,7 +40,7 @@ class TestCassandra < Minitest::Test
       );
     TABLE_CQL
 
-    keyspace = client.keyspace('ligado')
+    keyspace = client.keyspace(@keyspace)
     session.execute('DROP TABLE musicas') if keyspace.has_table?('musicas')
     session.execute(table_definition)
   end
