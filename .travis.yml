@@ -4,6 +4,7 @@ language: ruby
 services:
   - mongodb
   - riak
+  - cassandra
 
 rvm:
   - 2.3.0

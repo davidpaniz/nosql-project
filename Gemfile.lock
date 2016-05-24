@@ -3,9 +3,12 @@ GEM
   specs:
     beefcake (1.1.0)
     bson (4.0.2)
+    cassandra-driver (3.0.0)
+      ione (~> 1.2)
     cert_validator (0.0.1)
     i18n (0.7.0)
     innertube (1.0.2)
+    ione (1.2.3)
     minitest (5.8.3)
     mongo (2.2.3)
       bson (~> 4.0)
@@ -21,6 +24,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cassandra-driver
   minitest (~> 5.8, >= 5.8.3)
   mongo (~> 2.2.3)
   riak-client (~> 2.3.0)
