@@ -8,14 +8,38 @@ class TestNeo4j < Minitest::Test
   end
 
   def test_neo4j_all
-    #create
     assert_equal 0, @neo.query("""MATCH (m:Musico) RETURN count(m) AS total""").first.total
 
+    #create
     @neo.query("CREATE(dylan:Musico {nome : 'Bob Dylan', data_de_nascimento : '1941-05-24'})")
     bob = @neo.query("""MATCH (m:Musico) RETURN m.nome AS nome""").first
     assert_equal 'Bob Dylan', bob.nome
 
-    # carregar_musicos_e_musicas
+    carregar_musicos_e_musicas
+    assert_equal 10, @neo.query("""MATCH (m:Musico) RETURN count(m) AS total""").first.total
+    assert_equal 10, @neo.query("""MATCH (m:Musica) RETURN count(m) AS total""").first.total
+
+    # Quem gravou músicas escritas por compositores que
+    # escreveram músicas que um determinado músico gravou ?
+    result = @neo.query("""MATCH (interprete:Musico)-[gravou:GRAVOU]->(musica:Musica)
+                           MATCH (compositor:Musico)-[com1:COMPOS]->(musica:Musica)
+                           MATCH (compositor:Musico)-[com2:COMPOS]->(outraMusica:Musica)
+                           MATCH (outraMusica:Musica)<-[gravou2:GRAVOU]-(outroInter:Musico)
+                           WHERE interprete.nome = 'Ricky Martin'
+                           AND interprete <> outroInter
+                           RETURN outroInter.nome AS interprete,
+                                  compositor.nome AS compositor,
+                                  COUNT(DISTINCT outraMusica) AS total_musicas
+                           ORDER BY compositor.nome""").to_a
+
+    assert_equal "Jon Bon Jovi", result[0].interprete
+    assert_equal "Desmond Child", result[0].compositor
+    assert_equal 2, result[0].total_musicas
+
+    assert_equal "Steve Tyler", result[1].interprete
+    assert_equal "Desmond Child", result[1].compositor
+    assert_equal 1, result[1].total_musicas
+
   end
 
 
