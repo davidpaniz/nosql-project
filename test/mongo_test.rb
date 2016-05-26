@@ -3,6 +3,7 @@ require 'mongo'
 
 class TestMongo < Minitest::Test
   def setup
+    Mongo::Logger.logger.level = ::Logger::ERROR
     @mongo  = Mongo::Client.new(['localhost'], :database => "ligato")
     @albuns = @mongo[:albuns]
 
