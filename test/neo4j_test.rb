@@ -21,7 +21,7 @@ class TestNeo4j < Minitest::Test
 
     # Quem gravou músicas escritas por compositores que
     # escreveram músicas que um determinado músico gravou ?
-    result = @neo.query("""MATCH (interprete:Musico)-[gravou:GRAVOU]->(musica:Musica)
+    query  = @neo.query("""MATCH (interprete:Musico)-[gravou:GRAVOU]->(musica:Musica)
                            MATCH (compositor:Musico)-[com1:COMPOS]->(musica:Musica)
                            MATCH (compositor:Musico)-[com2:COMPOS]->(outraMusica:Musica)
                            MATCH (outraMusica:Musica)<-[gravou2:GRAVOU]-(outroInter:Musico)
@@ -30,7 +30,11 @@ class TestNeo4j < Minitest::Test
                            RETURN outroInter.nome AS interprete,
                                   compositor.nome AS compositor,
                                   COUNT(DISTINCT outraMusica) AS total_musicas
-                           ORDER BY compositor.nome""").to_a
+                           ORDER BY compositor.nome""")
+
+    p query
+    query.each {|x| p x}
+    result = query.to_a
 
     assert_equal "Jon Bon Jovi", result[0].interprete
     assert_equal "Desmond Child", result[0].compositor
