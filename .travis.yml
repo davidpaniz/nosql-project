@@ -17,6 +17,8 @@ before_install:
 # install Neo4j locally:
   - wget dist.neo4j.org/neo4j-community-3.0.1-unix.tar.gz
   - tar -xzf neo4j-community-3.0.1-unix.tar.gz
+  - ls -la
+  - echo `ls`
   - sed -i.bak s/dbms.security.auth_enabled=true/dbms.security.auth_enabled=false/g neo4j-community-3.0.1-unix/conf/neo4j-server.properties
   - neo4j-community-3.0.1-unix/bin/neo4j start
 
