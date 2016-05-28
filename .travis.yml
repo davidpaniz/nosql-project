@@ -14,16 +14,7 @@ before_install:
   - tar -xzf neo4j-community-3.0.1-unix.tar.gz
   - sed -i.bak s/#dbms.security.auth_enabled=false/dbms.security.auth_enabled=false/g neo4j-community-3.0.1/conf/neo4j.conf
   - neo4j-community-3.0.1/bin/neo4j start
-  - tail -n 500 neo4j-community-3.0.1/logs/neo4j.log
-  - sleep 20
-  - tail -n 20 neo4j-community-3.0.1/logs/neo4j.log
-  - sleep 20
-  - tail -n 20 neo4j-community-3.0.1/logs/neo4j.log
-  - sleep 20
-  - tail -n 20 neo4j-community-3.0.1/logs/neo4j.log
-  - sleep 20
-  - tail -n 20 neo4j-community-3.0.1/logs/neo4j.log
-
+  - while ! grep 'http://localhost:7474' neo4j-community-3.0.1/logs/neo4j.log; do echo "Waiting neo4j start"; sleep 1; done
 
 services:
   - mongodb
