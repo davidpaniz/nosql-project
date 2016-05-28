@@ -32,8 +32,6 @@ class TestNeo4j < Minitest::Test
                                   COUNT(DISTINCT outraMusica) AS total_musicas
                            ORDER BY compositor.nome""")
 
-    p query
-    query.each {|x| p x}
     result = query.to_a
 
     assert_equal "Jon Bon Jovi", result[0].interprete
