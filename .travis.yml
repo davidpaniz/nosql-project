@@ -10,11 +10,10 @@ jdk:
 
 before_install:
 # install Neo4j locally:
-  - wget dist.neo4j.org/neo4j-community-3.0.1-unix.tar.gz
-  - tar -xzf neo4j-community-3.0.1-unix.tar.gz
-  - sed -i.bak s/#dbms.security.auth_enabled=false/dbms.security.auth_enabled=false/g neo4j-community-3.0.1/conf/neo4j.conf
-  - neo4j-community-3.0.1/bin/neo4j start
-  - while ! grep 'http://localhost:7474' neo4j-community-3.0.1/logs/neo4j.log; do sleep 10; tail neo4j-community-3.0.1/logs/neo4j.log; done
+  - wget dist.neo4j.org/neo4j-community-2.3.4-unix.tar.gz
+  - tar -xzf neo4j-community-2.3.4-unix.tar.gz
+  - sed -i.bak s/dbms.security.auth_enabled=true/dbms.security.auth_enabled=false/g neo4j-community-2.3.4/conf/neo4j-server.properties
+  - neo4j-community-2.3.4/bin/neo4j start
 
 services:
   - mongodb
