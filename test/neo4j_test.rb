@@ -30,7 +30,7 @@ class TestNeo4j < Minitest::Test
                            RETURN outroInter.nome AS interprete,
                                   compositor.nome AS compositor,
                                   COUNT(DISTINCT outraMusica) AS total_musicas
-                           ORDER BY compositor.nome""")
+                           ORDER BY total_musicas DESC""")
 
     result = query.to_a
 
