@@ -14,7 +14,7 @@ before_install:
   - tar -xzf neo4j-community-3.2.1-unix.tar.gz
   - echo 'dbms.security.auth_enabled=false' >> neo4j-community-3.2.1/conf/neo4j.conf
   - neo4j-community-3.2.1/bin/neo4j start
-  - sleep 2 #wait server starts
+  - sleep 5 #wait server starts
 
 services:
   - mongodb

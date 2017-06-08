@@ -1,26 +1,34 @@
-mongo:
-  image: mongo
-  ports:
-    - "27017:27017"
+version: '2'
+services:
+  mongo:
+    image: mongo
+    mem_limit: 1024M
+    ports:
+      - "27017:27017"
 
+  cassandra:
+    image: cassandra
+    mem_limit: 4608M
+    ports:
+      - "9042:9042"
+      - "9160:9160"
+      - "7199:7199"
+      - "7000-7001:7000-7001"
 
-cassandra:
-  image: cassandra
-  ports:
-    - "9042:9042"
-    - "9160:9160"
-    - "7199:7199"
-    - "7000-7001:7000-7001"
+  neo4j:
+    image: neo4j
+    mem_limit: 1024M
+    ports:
+      - "7474:7474"
+      - "7473:7473"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=none
 
-neo4j:
-  image: neo4j
-  ports:
-    - "7474:7474"
-    - "7473:7473"
-    - "7687:7687"
+  riak:
+    image: basho/riak-kv
+    mem_limit: 1024M
+    ports:
+      - "8087:8087"
+      - "8098:8098"
 
-riak:
-  build: ./riak
-  ports:
-    - "8087:8087"
-    - "8098:8098"
