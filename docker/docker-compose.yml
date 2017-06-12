@@ -3,6 +3,8 @@ services:
   mongo:
     image: mongo
     mem_limit: 1024M
+    volumes:
+      - ../:/mnt/local
     ports:
       - "27017:27017"
 
@@ -31,4 +33,3 @@ services:
     ports:
       - "8087:8087"
       - "8098:8098"
-
