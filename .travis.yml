@@ -1,25 +1,11 @@
-# sudo: required
 language: ruby
-
-rvm:
-  - 2.4.1
-
-#Neo4j workaround
-jdk:
-  - oraclejdk8
-
-before_install:
-# install Neo4j locally:
-  - wget dist.neo4j.org/neo4j-community-3.2.1-unix.tar.gz
-  - tar -xzf neo4j-community-3.2.1-unix.tar.gz
-  - echo 'dbms.security.auth_enabled=false' >> neo4j-community-3.2.1/conf/neo4j.conf
-  - neo4j-community-3.2.1/bin/neo4j start
-  - sleep 5 #wait server starts
+dist: trusty
 
 services:
   - mongodb
   - riak
   - cassandra
+  - neo4j
 
 script:
 - bundle exec ruby test/all_suite.rb

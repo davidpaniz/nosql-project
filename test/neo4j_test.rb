@@ -1,9 +1,11 @@
 require 'minitest/autorun'
 require 'neo4j-core'
+require 'neo4j/core/cypher_session/adaptors/http'
 
 class TestNeo4j < Minitest::Test
   def setup
-    @neo = Neo4j::Session.open(:server_db, 'http://neo4j:password@localhost:7474')
+    http_adaptor = Neo4j::Core::CypherSession::Adaptors::HTTP.new('http://neo4j:password@localhost:7474')
+    @neo = Neo4j::Core::CypherSession.new(http_adaptor)
     flush_db
   end
 
@@ -84,15 +86,15 @@ class TestNeo4j < Minitest::Test
   end
 
   def manipula_composicao(musico, musica)
-    query = """MERGE (interprete:Musico {nome: {musico}})
-               MERGE (musica:Musica {nome: {musica}})
+    query = """MERGE (interprete:Musico {nome: $musico})
+               MERGE (musica:Musica {nome: $musica})
                MERGE (interprete)-[:COMPOS]->(musica)"""
     @neo.query(query, :musico => musico, :musica => musica)
   end
 
   def manipula_gravacao(musico, musica)
-    query = """MERGE (interprete:Musico {nome: {musico}})
-               MERGE (musica:Musica {nome: {musica}})
+    query = """MERGE (interprete:Musico {nome: $musico})
+               MERGE (musica:Musica {nome: $musica})
                MERGE (interprete)-[:GRAVOU]->(musica)"""
     @neo.query(query, :musico => musico, :musica => musica)
   end

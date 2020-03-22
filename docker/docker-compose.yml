@@ -2,7 +2,7 @@ version: '2'
 services:
   mongo:
     image: mongo
-    mem_limit: 1024M
+    mem_limit: 1G
     volumes:
       - ../:/mnt/local
     ports:
@@ -10,7 +10,7 @@ services:
 
   cassandra:
     image: cassandra
-    mem_limit: 4608M
+    mem_limit: 8G
     ports:
       - "9042:9042"
       - "9160:9160"
@@ -19,7 +19,7 @@ services:
 
   neo4j:
     image: neo4j
-    mem_limit: 1024M
+    mem_limit: 1G
     ports:
       - "7474:7474"
       - "7473:7473"
@@ -29,7 +29,7 @@ services:
 
   riak:
     image: basho/riak-kv
-    mem_limit: 1024M
+    mem_limit: 1G
     ports:
       - "8087:8087"
       - "8098:8098"
