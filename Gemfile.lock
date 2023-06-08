@@ -1,39 +1,60 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.0.3.2)
+    activesupport (6.0.6.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
     beefcake (1.2.0)
-    bson (4.10.0)
-    cassandra-driver (3.2.4)
+    bson (4.15.0)
+    cassandra-driver (3.2.5)
       ione (~> 1.2)
     cert_validator (0.0.1)
-    concurrent-ruby (1.1.7)
-    ethon (0.12.0)
-      ffi (>= 1.3.0)
-    faraday (1.0.1)
-      multipart-post (>= 1.2, < 3)
-    faraday_middleware (1.0.0)
+    concurrent-ruby (1.2.2)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    faraday (1.10.3)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0)
+      faraday-multipart (~> 1.0)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.0)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      faraday-retry (~> 1.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday-retry (1.0.3)
+    faraday_middleware (1.2.0)
       faraday (~> 1.0)
     faraday_middleware-multi_json (0.0.6)
       faraday_middleware
       multi_json
-    ffi (1.13.1)
+    ffi (1.15.5)
     httpclient (2.8.3)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     innertube (1.1.0)
-    ione (1.2.4)
-    json (2.3.1)
-    minitest (5.14.1)
-    mongo (2.13.0)
-      bson (>= 4.8.2, < 5.0.0)
+    ione (1.2.5)
+    json (2.6.3)
+    minitest (5.18.0)
+    mongo (2.18.2)
+      bson (>= 4.14.1, < 5.0.0)
     multi_json (1.15.0)
-    multipart-post (2.1.1)
+    multipart-post (2.3.0)
     neo4j-core (9.0.0)
       activesupport (>= 4.0)
       faraday (>= 0.9.0)
@@ -44,22 +65,28 @@ GEM
       multi_json
       net_tcp_client (>= 2.0.1)
       typhoeus (>= 1.1.2)
-    net_tcp_client (2.2.0)
+    net_tcp_client (2.2.1)
+    rbtree (0.4.6)
     riak-client (2.6.0)
       beefcake (~> 1.1)
       cert_validator (~> 0.0.1)
       i18n (~> 0.6)
       innertube (~> 1.0)
       multi_json (~> 1.0)
+    ruby2_keywords (0.0.5)
+    set (1.0.3)
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
     thread_safe (0.3.6)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
-    tzinfo (1.2.7)
+    tzinfo (1.2.11)
       thread_safe (~> 0.1)
-    zeitwerk (2.4.0)
+    zeitwerk (2.6.8)
 
 PLATFORMS
-  ruby
+  arm64-darwin-22
 
 DEPENDENCIES
   cassandra-driver
@@ -67,6 +94,7 @@ DEPENDENCIES
   mongo
   neo4j-core
   riak-client
+  sorted_set
 
 BUNDLED WITH
-   2.1.4
+   2.4.10
